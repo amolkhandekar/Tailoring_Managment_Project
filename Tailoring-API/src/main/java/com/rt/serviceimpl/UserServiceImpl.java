@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.rt.dto.LoginReqDTO;
 import com.rt.dto.ReqUserDTO;
 import com.rt.entity.User;
 import com.rt.mapper.UserMapper;
