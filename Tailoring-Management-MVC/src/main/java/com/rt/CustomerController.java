@@ -25,7 +25,7 @@ public class CustomerController {
     public String saveUser(@ModelAttribute CustomerReqDTO reqDto, Model model) {
         String response = customerService.addCustomer(reqDto);
         model.addAttribute("message", response);
-        return "redirect:/addUser"; 
+        return "addUser"; 
     }
 
     @GetMapping("/viewAllCustomer")

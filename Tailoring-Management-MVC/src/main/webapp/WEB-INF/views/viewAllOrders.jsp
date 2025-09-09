@@ -44,6 +44,12 @@
     background-color: #007bff;
     color: white;
 }
+.status-common {
+    color: #007bff;  /* एकच रंग (Blue) */
+    font-weight: bold;
+}
+
+
     </style>
 </head>
 <body>
@@ -103,22 +109,17 @@
                             <td>${order.orderDate}</td>
                             <td>${order.dueDate}</td>
                             <td>
-                                <form action="${pageContext.request.contextPath}/updateStatus" method="post">
-                                    <input type="hidden" name="id" value="${order.id}" />
-                                    <select name="status">
-                                        <option ${order.status=='Pending' ? 'selected' : ''}>Pending</option>
-                                        <option ${order.status=='In Progress' ? 'selected' : ''}>In Progress</option>
-                                        <option ${order.status=='Ready' ? 'selected' : ''}>Ready</option>
-                                        <option ${order.status=='Delivered' ? 'selected' : ''}>Delivered</option>
-                                    </select>
-                                    <button type="submit" class="btn-update">Update</button>
-                                </form>
-                            </td>
+    <span class="status-common">${order.status}</span>
+</td>
+
+
                             <td>${order.specialInstructions}</td>
                             <td>${order.totalAmount}</td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/updateOrder?id=${order.id}" class="btn-update">Edit</a>
-                                <a href="${pageContext.request.contextPath}/printOrder?id=${order.id}" class="btn-print" target="_blank">Print</a>
+                              <a href="${pageContext.request.contextPath}/editOrder?id=${order.id}"  class="btn-update">Edit</a>
+                                <a href="${pageContext.request.contextPath}/printOrder?id=${order.id}" 
+                                          class="btn-print" target="_blank">Print</a>
+
                             </td>
                         </tr>
                     </c:forEach>
@@ -154,6 +155,6 @@
             }
             window.location.href = url;
         });
-    </script>
+    </script>z
 </body>
 </html>

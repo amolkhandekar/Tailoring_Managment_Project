@@ -32,18 +32,18 @@
                     <input type="text" name="customerName" value="${order.customerName}" required />
                 </div>
 
-                <!-- Map Binding -->
+                <!-- Map Binding with IDs for JS -->
                 <div class="form-group">
                     <label>Shirt Quantity</label>
-                    <input type="number" name="clothingQuantities['Shirt']" value="${order.clothingQuantities['Shirt']}" />
+                    <input type="number" id="shirtQty" name="clothingQuantities['Shirt']" value="${order.clothingQuantities['Shirt']}" />
                 </div>
                 <div class="form-group">
                     <label>Pant Quantity</label>
-                    <input type="number" name="clothingQuantities['Pant']" value="${order.clothingQuantities['Pant']}" />
+                    <input type="number" id="pantQty" name="clothingQuantities['Pant']" value="${order.clothingQuantities['Pant']}" />
                 </div>
                 <div class="form-group">
                     <label>Kurta Quantity</label>
-                    <input type="number" name="clothingQuantities['Kurta']" value="${order.clothingQuantities['Kurta']}" />
+                    <input type="number" id="kurtaQty" name="clothingQuantities['Kurta']" value="${order.clothingQuantities['Kurta']}" />
                 </div>
 
                 <div class="form-group">
@@ -59,9 +59,10 @@
                 <div class="form-group">
                     <label>Status</label>
                     <select name="status" required>
-                        <option value="Pending" ${order.status == 'Pending' ? 'selected' : ''}>Pending</option>
-                        <option value="Completed" ${order.status == 'Completed' ? 'selected' : ''}>Completed</option>
-                        <option value="Cancelled" ${order.status == 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                       <option value="Pending" ${order.status == 'Pending' ? 'selected' : ''}>Pending</option>
+                       <option value="In Progress" ${order.status == 'In Progress' ? 'selected' : ''}>In Progress</option>
+                       <option value="Ready" ${order.status == 'Ready' ? 'selected' : ''}>Ready</option>
+                       <option value="Delivered" ${order.status == 'Delivered' ? 'selected' : ''}>Delivered</option>
                     </select>
                 </div>
 
@@ -71,10 +72,10 @@
                 </div>
 
                 <div class="form-group">
-    <label>Total Amount (₹)</label>
-    <input type="number" step="0.01" id="totalAmount" name="totalAmount" value="${order.totalAmount}" readonly />
-</div>
+                    <label>Total Amount (₹)</label>
+                    <input type="text" name="totalAmount" value="${order.totalAmount}" />
 
+                </div>
 
                 <button type="submit" class="btn-submit">Update Order</button>
             </form>
@@ -87,7 +88,7 @@
         let pant = parseInt(document.getElementById('pantQty').value) || 0;
         let kurta = parseInt(document.getElementById('kurtaQty').value) || 0;
 
-        let total = (shirt * 500) + (pant * 700) + (kurta * 800); // price logic
+        let total = (shirt * 500) + (pant * 700) + (kurta * 800); // Price logic
         document.getElementById('totalAmount').value = total;
     }
 
@@ -98,6 +99,4 @@
     // Initial calculation on page load
     updateTotal();
 </script>
-
-
 </html>

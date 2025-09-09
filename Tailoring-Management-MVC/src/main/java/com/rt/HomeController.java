@@ -15,6 +15,11 @@ public class HomeController {
         return "/login";
     }
     
+//    @GetMapping("/staffDashboard")
+//    public String staffDashboard(@RequestParam Long id, Model model) {
+//       
+//        return "staffDashboard";  // JSP file path
+//    }
    
 
     @GetMapping("/signup")
@@ -54,11 +59,23 @@ public class HomeController {
         model.addAttribute("customer", new UserReqDTO());
         return "/updateMeasurement";
     }
-    
-    @GetMapping("/printOrder")
-    public String printOrder(@RequestParam Long id, Model model) {
-       
-        return "printOrderSlip";  // JSP file path
+ 
+    @GetMapping("/OrderStatusReport")
+    public String orderStatusReport() {
+      
+       return "OrderStatusReport";
     }
+    
+//    @GetMapping("/dailyreport")
+//    public String dailyreport() {
+//       
+//        return "report-daily";
+//    }
+//    
+//    @GetMapping("/monthlyreport")
+//    public String monthlyreport() {
+//       
+//        return "monthlyOrders";
+//    }
     }
 

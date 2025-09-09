@@ -1,8 +1,10 @@
 package com.rt.service;
 
 import java.util.List;
+
 import java.util.Map;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import com.rt.dto.OrderReqDTO;
@@ -22,6 +24,10 @@ public interface OrderService {
 
 	List<OrderReqDTO> searchOrders(String status, String customerName);
 	 void updateOrderStatus(Long id, String status);
+
+	
+
+	
 
 
 }

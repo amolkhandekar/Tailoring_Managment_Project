@@ -13,6 +13,7 @@
             <div class="card-body">
                 <form action="${pageContext.request.contextPath}/updateCustomer" method="post">
                     <input type="hidden" name="id" value="${customer.id}" />
+                    <input type="hidden" name="registrationDate" value="${customer.registrationDate}" />
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Full Name</label>
@@ -34,10 +35,11 @@
                         <textarea name="address" class="form-control" id="address" rows="3">${customer.address}</textarea>
                     </div>
 
-                    <div class="d-flex justify-content-between">
-                        <button type="submit" class="btn btn-success">Update</button>
-                        <a href="${pageContext.request.contextPath}/viewAllCustomers" class="btn btn-secondary">Cancel</a>
-                    </div>
+                    <div class="d-flex justify-content-center gap-3">
+                   <button type="submit" class="btn btn-success px-4">Update</button>
+                   <a href="${pageContext.request.contextPath}/viewAllCustomer" class="btn btn-secondary px-4">Cancel</a>
+                 </div>
+
                 </form>
             </div>
         </div>

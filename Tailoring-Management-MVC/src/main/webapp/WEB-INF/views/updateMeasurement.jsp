@@ -65,7 +65,7 @@
                     <button type="submit" class="btn btn-primary">Update</button>
 
 
-                    <a href="${pageContext.request.contextPath}/measurements" class="btn btn-secondary">Cancel</a>
+                    <a href="${pageContext.request.contextPath}/viewAllMeasurement" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         </div>

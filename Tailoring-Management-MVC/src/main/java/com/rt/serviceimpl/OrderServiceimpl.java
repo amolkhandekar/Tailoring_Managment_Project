@@ -2,11 +2,14 @@ package com.rt.serviceimpl;
 
 import java.util.Arrays;
 
+
+
 import java.util.List;
 import java.util.Map;
-
+import com.rt.dto.OrderReqDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.rt.dto.OrderReqDTO;
 import com.rt.service.OrderService;
 
 @Service
@@ -50,11 +52,14 @@ public class OrderServiceimpl implements OrderService{
 	        return Arrays.asList(orders);
 	    }
 
-	    @Override
-	    public OrderReqDTO getOrderById(Long id) {
-	        return restTemplate.getForObject(BASE_URL + "/order/" + id, OrderReqDTO.class);
-	    }
-
+	 @Override
+	 public OrderReqDTO getOrderById(Long id) {
+	     String url = BASE_URL + "/order/" + id;
+	     OrderReqDTO dto = restTemplate.getForObject(url, OrderReqDTO.class);
+	     System.out.println("Fetched Order: " + dto);
+	     return dto;
+	 }
+	 
 	    @Override
 	    public String updateOrder(OrderReqDTO dto) {
 	        return restTemplate.postForObject(BASE_URL + "/update", dto, String.class);
@@ -91,6 +96,12 @@ public class OrderServiceimpl implements OrderService{
 
 	        return response.getBody();
 	    }
+
+
+
+
+
+	   
 
 
 

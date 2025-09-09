@@ -7,74 +7,88 @@
     <title>Add Order</title>
     <link rel="stylesheet" href="resources/assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <style>
         body {
             background-color: #f2f4f7;
         }
 
-        .center-form-container {
+        .main-wrapper {
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: calc(100vh - 100px);
-            padding-top: 100px;
+        }
+
+        .content-area {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: #f2f4f7;
         }
 
         .form-card {
+            max-width: 800px;
+            margin: 0 auto;
             background: #fff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            padding: 40px;
-            width: 60%;
-            border-radius: 12px;
-            position: relative;
+            border-radius: 10px;
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .form-title {
-            font-size: 22px;
-            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
             text-align: center;
-            font-weight: bold;
         }
 
         .form-group {
             margin-bottom: 20px;
         }
 
-        .form-group label {
-            font-weight: bold;
-            margin-bottom: 5px;
+        label {
+            font-weight: 500;
+            margin-bottom: 8px;
             display: block;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        input[type="text"],
+        input[type="date"],
+        select,
+        textarea {
             width: 100%;
             padding: 10px 14px;
-            font-size: 15px;
             border: 1px solid #ccc;
             border-radius: 6px;
+            font-size: 15px;
         }
 
         .form-row {
             display: flex;
-            gap: 30px;
+            gap: 20px;
         }
 
         .form-row .form-group {
             flex: 1;
         }
 
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            display: none;
+        .checkbox-group label {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .text-center {
             text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
         }
 
         #suggestions {
@@ -97,6 +111,17 @@
         .suggestion-item:hover {
             background-color: #f0f0f0;
         }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -106,7 +131,7 @@
 <div class="main-panel">
     <%@ include file="modules/header.jsp" %>
 
-    <div class="content center-form-container">
+    <div class="content-area">
         <div class="form-card">
             <div class="form-title">Create New Order</div>
 
@@ -115,36 +140,30 @@
             </div>
 
             <!-- Search Customer -->
-            <div class="form-group">
+            <div class="form-group" style="position: relative;">
                 <label for="searchCustomer">Search Customer *</label>
                 <input type="text" id="searchCustomer" placeholder="Enter customer name...">
+                <input type="hidden" id="selectedCustomerName" name="customerName">
                 <div id="suggestions"></div>
             </div>
 
             <!-- Order Form -->
-           <form id="orderForm" action="${pageContext.request.contextPath}/saveOrder" method="post">
+            <form id="orderForm" action="${pageContext.request.contextPath}/saveOrder" method="post">
 
-                <input type="hidden" id="selectedCustomerName" name="customerName">
-
-                <div class="form-group">
-                    <label>Clothing Type *</label><br/>
-                    <label><input type="checkbox" name="clothingTypes" value="Shirt"> Shirt</label>&nbsp;&nbsp;
-                    <label><input type="checkbox" name="clothingTypes" value="Pant"> Pant</label>&nbsp;&nbsp;
+                <!-- Clothing Types -->
+                <div class="form-group checkbox-group">
+                    <label>Clothing Type *</label>
+                    <label><input type="checkbox" name="clothingTypes" value="Shirt"> Shirt</label>
+                    <label><input type="checkbox" name="clothingTypes" value="Pant"> Pant</label>
                     <label><input type="checkbox" name="clothingTypes" value="Kurta"> Kurta</label>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label>Quantities (e.g. 2,1,1) *</label>
-                        <input type="text" 
-       id="quantities" 
-       name="quantities" 
-       pattern="^\d+(,\d+)*$" 
-       title="उदा: 2,1,1 या स्वरूपात संख्या द्या" 
-       required />
-
+                        <input type="text" id="quantities" name="quantities" pattern="^\d+(,\d+)*$"
+                               title="उदा: 2,1,1 या स्वरूपात संख्या द्या" required/>
                     </div>
-
                     <div class="form-group">
                         <label>Total Amount (₹)</label>
                         <input type="text" name="amount" id="totalAmount" readonly>
@@ -161,7 +180,6 @@
                         <label>Order Date *</label>
                         <input type="date" name="orderDate" required>
                     </div>
-
                     <div class="form-group">
                         <label>Due Date *</label>
                         <input type="date" name="dueDate" required>
@@ -180,14 +198,14 @@
                 </div>
 
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary">Submit Order</button>
+                    <button type="submit" class="btn-primary">Submit Order</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<!-- Scripts -->
+<!-- JS Script (same as before, no change) -->
 <script>
     const prices = {
         "Shirt": 300,
@@ -213,14 +231,13 @@
     }
 
     $(document).ready(function () {
-        // Customer search
         $('#searchCustomer').on('input', function () {
             const query = $(this).val().trim();
             if (query.length >= 2) {
                 $.ajax({
                     url: 'http://localhost:8181/api/measurements/customer-names',
                     method: 'GET',
-                    data: { query: query },
+                    data: {query: query},
                     success: function (data) {
                         let suggestionHTML = '';
                         data.forEach(function (name) {
@@ -237,7 +254,6 @@
             }
         });
 
-        // Select customer
         $(document).on('click', '.suggestion-item', function () {
             const selectedName = $(this).text();
             $('#searchCustomer').val(selectedName);
@@ -246,7 +262,6 @@
             $('#orderForm').slideDown();
         });
 
-        // Real-time calculation
         $('#quantities').on('input', calculateTotal);
         $('input[name="clothingTypes"]').on('change', calculateTotal);
 
@@ -290,8 +305,6 @@
             });
         });
 
-
-        // Hide suggestions if clicked outside
         $(document).click(function (e) {
             if (!$(e.target).closest('#searchCustomer, #suggestions').length) {
                 $('#suggestions').empty().hide();
@@ -299,6 +312,5 @@
         });
     });
 </script>
-
 </body>
 </html>
